@@ -1,0 +1,62 @@
+# Deepfake Detection System Configuration
+
+# Data paths
+data:
+  train_dir: "data/train"
+  val_dir: "data/val"
+  test_dir: "data/test"
+  classes: ["real", "fake"]
+
+# Model settings
+model:
+  name: "efficientnet_b4"
+  pretrained: true
+  num_classes: 1  # Binary classification (sigmoid output)
+  dropout: 0.3
+  input_size: 380
+  checkpoint_dir: "models"
+
+# Training settings
+training:
+  epochs: 30
+  batch_size: 16
+  learning_rate: 0.0001
+  weight_decay: 0.00001
+  optimizer: "adam"
+  loss: "bce"
+  early_stopping_patience: 5
+  num_workers: 4
+  device: "auto"  # auto, cuda, cpu
+
+# Data augmentation
+augmentation:
+  horizontal_flip: true
+  rotation_degrees: 15
+  brightness_range: [0.8, 1.2]
+  gaussian_noise_std: 0.02
+  blur_kernel: 3
+  jpeg_compression_quality: [70, 100]
+
+# Face detection
+face_detection:
+  method: "mtcnn"
+  confidence_threshold: 0.9
+  margin: 20
+  min_face_size: 40
+
+# Video processing
+video:
+  frame_interval: 10  # Extract every Nth frame
+  max_frames: 50      # Max frames to process per video
+
+# Evaluation
+evaluation:
+  output_dir: "outputs"
+  save_plots: true
+
+# Web app
+app:
+  host: "0.0.0.0"
+  port: 8000
+  model_path: "models/best_model.pth"
+  max_upload_size_mb: 100
