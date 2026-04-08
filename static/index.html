@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepfake Image Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="bg-shape bg-shape-a"></div>
+    <div class="bg-shape bg-shape-b"></div>
+
+    <main class="app-shell">
+        <header class="hero">
+            <h1>Deepfake Image Detection</h1>
+            <p class="subtitle">
+                Detect deepfakes in both face images and videos from one interface.
+            </p>
+            <p class="subtitle secondary-subtitle">
+                Video analysis runs through the local backend detector configuration.
+            </p>
+        </header>
+
+        <section class="panel upload-panel">
+            <div class="mode-toggle" role="tablist" aria-label="Detection type">
+                <button id="mode-image" class="mode-btn is-selected" type="button" role="tab" aria-selected="true">Image</button>
+                <button id="mode-video" class="mode-btn" type="button" role="tab" aria-selected="false">Video</button>
+            </div>
+
+            <div id="drop-zone" class="drop-zone" tabindex="0" aria-label="Drop zone for image upload">
+                <input id="file-input" type="file" accept=".jpg,.jpeg,.png,.mp4,.avi,.mov,.mpeg,.mpg,.webm,.m4v,image/jpeg,image/png,video/mp4,video/x-msvideo,video/quicktime,video/mpeg,video/webm" hidden />
+                <p id="drop-title" class="drop-title">Drop image here</p>
+                <p id="drop-subtitle" class="drop-subtitle">or click to browse JPG, JPEG, PNG files</p>
+            </div>
+
+            <div class="button-row">
+                <button id="choose-btn" type="button" class="btn btn-outline">Choose File</button>
+                <button id="analyze-btn" type="button" class="btn btn-solid" disabled>Analyze</button>
+            </div>
+
+            <p id="file-meta" class="file-meta">No image selected.</p>
+            <p id="error-text" class="error-text" role="alert"></p>
+        </section>
+
+        <section class="panel preview-panel">
+            <h2>Preview</h2>
+            <div class="preview-frame">
+                <img id="preview-image" alt="Uploaded image preview" />
+                <video id="preview-video" controls playsinline muted></video>
+                <p id="preview-placeholder">Image preview appears here.</p>
+            </div>
+        </section>
+
+        <section class="panel result-panel">
+            <div class="result-top">
+                <h2>Prediction</h2>
+                <div id="spinner" class="spinner hidden" aria-live="polite" aria-label="Loading"></div>
+            </div>
+
+            <div id="result-empty" class="result-empty">
+                Upload and analyze an image to view label confidence and class probabilities.
+            </div>
+
+            <div id="result-content" class="result-content hidden">
+                <div class="label-row">
+                    <span id="prediction-label" class="prediction-label">-</span>
+                    <span id="prediction-confidence" class="prediction-confidence">-</span>
+                </div>
+                <p id="result-meta" class="result-meta hidden"></p>
+                <div id="probability-bars" class="probability-bars"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+env/
+.pytest_cache/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Data and model artifacts
+Dataset/
+dataset/
+video_model/GenConViT/weight/*.pth
+video_model/GenConViT/weight/.cache/
